@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>econau · garrofa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Kalam:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stall:#0f4d36; --stall-2:#0b3b29; --fluor:#f2f53a; --orange:#ff7a2f;
+  --ink:#16100c; --carob:#5a2e1a; --kraft:#c48f55; --paper:#fbf7ec;
+  --ease-out:cubic-bezier(.23,1,.32,1);
+  --display:"Bricolage Grotesque",system-ui,sans-serif; --marker:"Kalam",cursive;
+}
+*{box-sizing:border-box;margin:0}
+body{background:var(--stall);color:var(--paper);font:500 17px/1.5 var(--display);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;cursor:pointer;border:0}
+svg{display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* Fascia */
+header{position:sticky;top:0;z-index:10;background:var(--stall-2);border-bottom:3px solid var(--fluor)}
+.bar{display:flex;align-items:center;gap:20px;height:68px}
+.logo{font-weight:800;font-size:30px;letter-spacing:-.04em;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo svg{width:28px;height:28px}
+nav{display:flex;gap:22px;margin-left:auto;font-size:15px}
+nav a{text-decoration:none;opacity:.85;transition:opacity .2s ease}
+@media (hover:hover){nav a:hover{opacity:1}}
+.lang{display:flex;border:2px solid var(--fluor);border-radius:999px;padding:2px}
+.lang button{background:none;color:var(--fluor);font-weight:800;font-size:13px;padding:5px 11px;border-radius:999px;transition:background .2s ease,color .2s ease}
+.lang button[aria-pressed=true]{background:var(--fluor);color:var(--ink)}
+.cart{position:relative;background:var(--fluor);color:var(--ink);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;transition:transform .16s var(--ease-out)}
+.cart:active,.btn:active{transform:scale(.97)}
+.cart svg{width:22px;height:22px}
+.count{position:absolute;top:-4px;right:-4px;background:var(--orange);color:var(--ink);font-size:12px;font-weight:800;min-width:20px;height:20px;border-radius:10px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.count.bump{animation:bump .3s var(--ease-out)}
+@keyframes bump{50%{transform:scale(1.3)}}
+
+/* Awning */
+.awning{height:44px;background:repeating-linear-gradient(90deg,var(--paper) 0 60px,var(--orange) 60px 120px);
+  -webkit-mask:radial-gradient(30px 22px at 30px 22px,#000 98%,transparent) 0 0/60px 44px repeat-x;
+          mask:radial-gradient(30px 22px at 30px 22px,#000 98%,transparent) 0 0/60px 44px repeat-x}
+.awning-top{height:22px;background:repeating-linear-gradient(90deg,var(--paper) 0 60px,var(--orange) 60px 120px)}
+
+/* Hero */
+.hero{padding:56px 0 96px}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:end}
+.kicker{font-family:var(--marker);color:var(--fluor);font-size:22px;transform:rotate(-2deg);display:inline-block}
+h1{font-weight:800;font-size:clamp(48px,7.4vw,104px);line-height:.9;letter-spacing:-.045em;margin:10px 0 22px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--fluor)}
+.lede{font-size:19px;max-width:30em;opacity:.9}
+.stall{display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:end;padding-bottom:16px;border-bottom:14px solid var(--kraft);position:relative}
+.stall::after{content:"";position:absolute;left:0;right:0;bottom:-28px;height:14px;background:var(--carob)}
+
+/* Product = item + price card */
+.product{display:flex;flex-direction:column;align-items:center}
+.product .item{width:100%;max-width:200px}
+.tag{--r:-3deg;position:relative;width:100%;background:var(--fluor);color:var(--ink);border-radius:6px;padding:16px 16px 14px;margin-bottom:-18px;transform:rotate(var(--r));box-shadow:0 10px 24px -12px rgba(0,0,0,.6);transition:transform .25s var(--ease-out);z-index:1}
+.tag.orange{background:var(--orange);--r:2.5deg}
+.tag::before{content:"";position:absolute;left:50%;bottom:-38px;width:4px;height:40px;background:var(--ink);transform:translateX(-50%);z-index:-1}
+@media (hover:hover) and (pointer:fine){.product:hover .tag{transform:rotate(0) translateY(-6px)}}
+.tag h3{font-family:var(--marker);font-size:26px;line-height:1.05}
+.tag .fmt{font-size:13px;font-weight:600;margin:4px 0 10px}
+.price{display:flex;align-items:baseline;gap:6px;font-family:var(--marker);font-size:46px;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-size:14px;font-family:var(--display);font-weight:600}
+.example{font-size:11px;font-weight:600;opacity:.7;text-transform:uppercase;letter-spacing:.06em}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--fluor);font-weight:800;font-size:15px;padding:11px 16px;border-radius:999px;margin-top:12px;width:100%;justify-content:center;transition:transform .16s var(--ease-out),background .2s ease}
+.btn svg{width:18px;height:18px}
+.btn.done{background:var(--stall)}
+
+/* Sections */
+section{padding:96px 0}
+.light{background:var(--paper);color:var(--ink)}
+h2{font-weight:800;font-size:clamp(36px,5vw,64px);line-height:.95;letter-spacing:-.04em;margin-bottom:16px;text-wrap:balance}
+.intro{max-width:36em;font-size:18px;opacity:.8;margin-bottom:56px}
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.why article{border-top:4px solid var(--ink);padding-top:20px}
+.why svg{width:48px;height:48px;margin-bottom:18px;color:var(--stall)}
+.why h3{font-size:22px;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.why p{opacity:.75}
+
+.shop{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.card{background:var(--stall-2);border-radius:14px;padding:28px;display:grid;grid-template-columns:150px 1fr;gap:24px;align-items:center}
+.card .tag{margin:0;transform:rotate(-1.5deg)}
+.card p{opacity:.85;margin-bottom:6px}
+.card ul{list-style:none;padding:0;font-size:14px;opacity:.8}
+.card li{display:flex;gap:8px;align-items:center;margin-top:4px}
+.card li svg{width:16px;height:16px;color:var(--fluor);flex:none}
+
+.uses{display:flex;flex-wrap:wrap;gap:12px}
+.chip{display:flex;align-items:center;gap:10px;background:var(--fluor);color:var(--ink);border-radius:999px;padding:10px 18px 10px 12px;font-weight:700}
+.chip svg{width:26px;height:26px}
+
+footer{background:var(--ink);padding:56px 0;font-size:14px}
+.foot{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:end}
+.foot .logo{font-size:56px}
+.foot p{opacity:.6;max-width:28em}
+
+@media (max-width:860px){
+  nav{display:none}
+  .lang{margin-left:auto}
+  .hero-grid,.shop,.why{grid-template-columns:1fr}
+  .hero{padding:36px 0 80px}
+  .card{grid-template-columns:110px 1fr;padding:20px}
+}
+@media (max-width:420px){.stall{gap:12px}.tag{padding:12px}.tag h3{font-size:21px}.price{font-size:36px}}
+
+[data-i18n]{transition:opacity .15s ease}
+.swap [data-i18n]{opacity:0}
+@media (prefers-reduced-motion:reduce){*{transition-duration:0s!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pod" viewBox="0 0 32 32"><path d="M5 25c3-9 9-17 22-20-1 11-8 19-19 21-2 .4-3.4 0-3-1z" fill="currentColor"/><g fill="var(--fluor)"><circle cx="11" cy="21" r="1.6"/><circle cx="15.5" cy="16.5" r="1.6"/><circle cx="20" cy="12" r="1.6"/></g></symbol>
+  <symbol id="basket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9h18l-2 11H5z"/><path d="M8 9l4-6 4 6M9 13v4M15 13v4"/></symbol>
+  <symbol id="plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></symbol>
+</svg>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#"><svg><use href="#pod" style="color:var(--fluor)"/></svg>econau</a>
+    <nav>
+      <a href="#botiga" data-i18n="nav.shop">Tienda</a>
+      <a href="#garrofa" data-i18n="nav.why">La algarroba</a>
+      <a href="#usos" data-i18n="nav.uses">Recetas</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma / Llengua">
+      <button data-lang="es" aria-pressed="true">ES</button>
+      <button data-lang="ca" aria-pressed="false">CA</button>
+    </div>
+    <button class="cart" aria-label="Cesta"><svg><use href="#basket"/></svg><span class="count" id="count">0</span></button>
+  </div>
+</header>
+
+<div class="awning-top"></div><div class="awning"></div>
+
+<main>
+<section class="hero" style="padding-top:40px">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker" data-i18n="hero.kicker">Recién molida, cada semana</span>
+      <h1 data-i18n-html="hero.title">Todo lo bueno del cacao, <em>sin cacao.</em></h1>
+      <p class="lede" data-i18n="hero.lede">En econau solo hacemos una cosa: algarroba. Harina tostada y cremas para untar, dulces por naturaleza y listas para tu cocina.</p>
+    </div>
+
+    <div class="stall" aria-label="Productos">
+      <div class="product">
+        <div class="tag">
+          <h3 data-i18n="p1.name">Harina de algarroba</h3>
+          <div class="fmt" data-i18n="p1.fmt">Tostada · bolsa 500 g</div>
+          <div class="price">4,90<small>€</small></div>
+          <div class="example" data-i18n="example">Precio de ejemplo</div>
+          <button class="btn" data-add><svg><use href="#plus"/></svg><span data-i18n="add">A la cesta</span></button>
+        </div>
+        <svg class="item" viewBox="0 0 200 220" aria-hidden="true">
+          <path d="M40 40h120l14 170H26z" fill="var(--kraft)"/>
+          <path d="M40 40l10-22h100l10 22" fill="#a9763f"/>
+          <path d="M40 40h120" stroke="var(--carob)" stroke-width="3" stroke-dasharray="6 6"/>
+          <rect x="56" y="96" width="88" height="70" rx="4" fill="var(--paper)"/>
+          <text x="100" y="124" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="20" fill="var(--ink)">econau</text>
+          <use href="#pod" x="84" y="132" width="32" height="32" style="color:var(--carob)"/>
+        </svg>
+      </div>
+      <div class="product">
+        <div class="tag orange">
+          <h3 data-i18n="p2.name">Crema de algarroba</h3>
+          <div class="fmt" data-i18n="p2.fmt">Para untar · tarro 250 g</div>
+          <div class="price">6,50<small>€</small></div>
+          <div class="example" data-i18n="example">Precio de ejemplo</div>
+          <button class="btn" data-add><svg><use href="#plus"/></svg><span data-i18n="add">A la cesta</span></button>
+        </div>
+        <svg class="item" viewBox="0 0 200 220" aria-hidden="true">
+          <rect x="44" y="30" width="112" height="34" rx="6" fill="var(--ink)"/>
+          <rect x="44" y="42" width="112" height="4" fill="#2c221b"/>
+          <rect x="34" y="62" width="132" height="150" rx="22" fill="var(--carob)"/>
+          <rect x="48" y="74" width="10" height="110" rx="5" fill="#fff" opacity=".18"/>
+          <rect x="56" y="104" width="88" height="70" rx="4" fill="var(--fluor)"/>
+          <text x="100" y="132" text-anchor="middle" font-family="Bricolage Grotesque" font-weight="800" font-size="20" fill="var(--ink)">econau</text>
+          <use href="#pod" x="84" y="140" width="32" height="32" style="color:var(--stall)"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="garrofa">
+  <div class="wrap">
+    <h2 data-i18n="why.title">¿Por qué algarroba?</h2>
+    <p class="intro" data-i18n="why.intro">El garrofer crece en secano, entre márgenes de piedra, sin apenas agua. Su fruto es dulce, tostado y sorprendentemente versátil.</p>
+    <div class="why">
+      <article>
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c8 8 12 15 12 22a12 12 0 0 1-24 0c0-7 4-14 12-22z"/><path d="M18 30a6 6 0 0 0 6 6"/></svg>
+        <h3 data-i18n="w1.t">Dulce de por sí</h3>
+        <p data-i18n="w1.d">Su azúcar natural permite endulzar recetas con menos azúcar añadido.</p>
+      </article>
+      <article>
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="16"/><path d="M17 17l14 14"/></svg>
+        <h3 data-i18n="w2.t">Sin cafeína</h3>
+        <p data-i18n="w2.d">Sabor parecido al cacao, sin cafeína ni teobromina. Apta para todos.</p>
+      </article>
+      <article>
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 42V20"/><path d="M24 22c-8 0-14-5-14-13 8 0 14 5 14 13zM24 26c7 0 12-4 12-11-7 0-12 4-12 11z"/><path d="M8 42h32"/></svg>
+        <h3 data-i18n="w3.t">Cultivo de secano</h3>
+        <p data-i18n="w3.d">Un árbol mediterráneo que no necesita riego. Un ingrediente con poca huella.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="botiga">
+  <div class="wrap">
+    <h2 data-i18n="shop.title">La parada</h2>
+    <p class="intro" data-i18n="shop.intro">Dos productos, hechos con cuidado. Elige formato y llévatelos a casa.</p>
+    <div class="shop">
+      <div class="card">
+        <div class="tag"><h3 data-i18n="p1.name">Harina de algarroba</h3><div class="price">4,90<small>€</small></div><div class="example" data-i18n="example">Precio de ejemplo</div></div>
+        <div>
+          <p data-i18n="p1.desc">Fruto tostado y molido fino. Para repostería, batidos y panes.</p>
+          <ul>
+            <li><svg><use href="#check"/></svg><span data-i18n="p1.f1">Sin gluten de forma natural</span></li>
+            <li><svg><use href="#check"/></svg><span data-i18n="p1.f2">Bolsa 500 g o 1 kg</span></li>
+          </ul>
+          <button class="btn" data-add><svg><use href="#plus"/></svg><span data-i18n="add">A la cesta</span></button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="tag orange"><h3 data-i18n="p2.name">Crema de algarroba</h3><div class="price">6,50<small>€</small></div><div class="example" data-i18n="example">Precio de ejemplo</div></div>
+        <div>
+          <p data-i18n="p2.desc">Cremosa y untable, con el sabor tostado de la algarroba.</p>
+          <ul>
+            <li><svg><use href="#check"/></svg><span data-i18n="p2.f1">Para tostadas, crepes y fruta</span></li>
+            <li><svg><use href="#check"/></svg><span data-i18n="p2.f2">Tarro de vidrio 250 g</span></li>
+          </ul>
+          <button class="btn" data-add><svg><use href="#plus"/></svg><span data-i18n="add">A la cesta</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="light" id="usos">
+  <div class="wrap">
+    <h2 data-i18n="uses.title">¿Y en la cocina?</h2>
+    <p class="intro" data-i18n="uses.intro">Sustituye el cacao a partes iguales o úsala para dar un toque tostado.</p>
+    <div class="uses">
+      <span class="chip"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 14h18l-2 7H6z"/><path d="M8 14c0-4 2-7 5-7s5 3 5 7"/></svg><span data-i18n="u1">Bizcochos</span></span>
+      <span class="chip"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 4h12l-2 18H9z"/><path d="M8 10h10"/></svg><span data-i18n="u2">Batidos</span></span>
+      <span class="chip"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="9" width="18" height="12" rx="3"/><path d="M8 9c0-3 2-5 5-5s5 2 5 5"/></svg><span data-i18n="u3">Pan</span></span>
+      <span class="chip"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><ellipse cx="13" cy="15" rx="9" ry="6"/><path d="M13 9V4"/></svg><span data-i18n="u4">Crepes</span></span>
+      <span class="chip"><svg viewBox="0 0 26 26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h16a8 8 0 0 1-16 0z"/><path d="M9 8c0-2 2-2 2-4M15 8c0-2 2-2 2-4"/></svg><span data-i18n="u5">Desayunos</span></span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span class="logo"><svg style="width:46px;height:46px"><use href="#pod" style="color:var(--fluor)"/></svg>econau</span>
+    <p data-i18n="foot">Productos de algarroba. Web de demostración: precios y formatos son de ejemplo.</p>
+  </div>
+</footer>
+
+<script>
+const T={
+ca:{"nav.shop":"Botiga","nav.why":"La garrofa","nav.uses":"Receptes","hero.kicker":"Acabada de moldre, cada setmana","hero.title":"Tot el bo del cacau, <em>sense cacau.</em>","hero.lede":"A econau només fem una cosa: garrofa. Farina torrada i cremes per untar, dolces per naturalesa i a punt per a la teva cuina.","p1.name":"Farina de garrofa","p1.fmt":"Torrada · bossa 500 g","p2.name":"Crema de garrofa","p2.fmt":"Per untar · pot 250 g","example":"Preu d'exemple","add":"A la cistella","added":"Afegit","why.title":"Per què garrofa?","why.intro":"El garrofer creix en secà, entre marges de pedra, gairebé sense aigua. El seu fruit és dolç, torrat i sorprenentment versàtil.","w1.t":"Dolça per si mateixa","w1.d":"El seu sucre natural permet endolcir receptes amb menys sucre afegit.","w2.t":"Sense cafeïna","w2.d":"Gust semblant al cacau, sense cafeïna ni teobromina. Apta per a tothom.","w3.t":"Conreu de secà","w3.d":"Un arbre mediterrani que no necessita reg. Un ingredient amb poca petjada.","shop.title":"La parada","shop.intro":"Dos productes, fets amb cura. Tria el format i emporta-te'ls a casa.","p1.desc":"Fruit torrat i mòlt fi. Per a rebosteria, batuts i pans.","p1.f1":"Sense gluten de manera natural","p1.f2":"Bossa de 500 g o 1 kg","p2.desc":"Cremosa i untable, amb el gust torrat de la garrofa.","p2.f1":"Per a torrades, creps i fruita","p2.f2":"Pot de vidre de 250 g","uses.title":"I a la cuina?","uses.intro":"Substitueix el cacau a parts iguals o fes-la servir per donar un toc torrat.","u1":"Pastissos","u2":"Batuts","u3":"Pa","u4":"Creps","u5":"Esmorzars","foot":"Productes de garrofa. Web de demostració: preus i formats són d'exemple."},
+es:{}
+};
+document.querySelectorAll("[data-i18n]").forEach(e=>T.es[e.dataset.i18n]=e.textContent);
+document.querySelectorAll("[data-i18n-html]").forEach(e=>T.es[e.dataset.i18nHtml]=e.innerHTML);
+T.es.added="Añadido";
+let lang="es";
+function setLang(l){
+  if(l===lang)return; lang=l;
+  document.body.classList.add("swap");
+  setTimeout(()=>{
+    document.documentElement.lang=l;
+    document.querySelectorAll("[data-i18n]").forEach(e=>{const k=e.closest(".done")?"added":e.dataset.i18n;e.textContent=T[l][k]});
+    document.querySelectorAll("[data-i18n-html]").forEach(e=>e.innerHTML=T[l][e.dataset.i18nHtml]);
+    document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lang===l));
+    document.body.classList.remove("swap");
+    try{localStorage.setItem("lang",l)}catch(e){}
+  },150);
+}
+document.querySelectorAll(".lang button").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+try{const s=localStorage.getItem("lang");if(s==="ca")setLang("ca")}catch(e){}
+
+const count=document.getElementById("count");let n=0;
+document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>{
+  count.textContent=++n;count.classList.remove("bump");void count.offsetWidth;count.classList.add("bump");
+  b.classList.add("done");b.querySelector("use").setAttribute("href","#check");b.querySelector("span").textContent=T[lang].added;
+  clearTimeout(b.t);b.t=setTimeout(()=>{b.classList.remove("done");b.querySelector("use").setAttribute("href","#plus");b.querySelector("span").textContent=T[lang].add},1400);
+});
+</script>
+</body>
+</html>
